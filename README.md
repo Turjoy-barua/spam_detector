@@ -10,4 +10,12 @@
 - precision -> recall -> F1 score -> give the report +++ threshold tuning insted of 0.5 
 - uses the interface to say if its spam or not 
 ## what the app gona contain
-- 
+- input field: Subject
+- email body
+- slider threshold or sensitivity
+- buttons check 
+- results -> spam not spam and probability
+- the words that influence 
+- loading 
+- train model or load model
+- image heatmap
