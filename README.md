@@ -19,3 +19,31 @@
 - loading 
 - train model or load model
 - image heatmap
+
+# version française
+# Détecteur_de_spam
+
+- L'objectif est d'apprendre à un ordinateur à reconnaître automatiquement les spams grâce à l'apprentissage par l'exemple.
+
+- L'application va entraîner un modèle sur une base de données massive d'emails contenant l'objet, le corps et l'étiquette « spam » ou « non-spam ».
+
+## Fonctionnement
+- Extraction des données de la base de données
+- Nettoyage et combinaison du corps et de l'objet des données
+- Conversion des données en texte à l'aide de TF-IDF
+- Entraînement du modèle : 80 % pour l'entraînement, 20 % pour le test → attribution d'une étiquette et d'une probabilité
+- Évaluation du modèle à l'aide d'une matrice de confusion → calcul de la précision
+- Précision → Rappel → Score F1 → génération du rapport +++ réglage du seuil au-delà de 0,5
+- Utilisation de l'interface pour indiquer s'il s'agit d'un spam ou non
+
+## Contenu de l'application
+
+- Champ de saisie : Objet
+- Corps de l'email
+- Curseur de seuil ou de sensibilité
+- Boutons de validation
+- Résultats : spam ou non-spam et probabilité
+- Affichage des mots clés
+- Chargement
+- Entraînement ou chargement du modèle
+- Carte thermique
