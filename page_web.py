@@ -1,8 +1,17 @@
+def createOutputHTML(output:bool="", output_proba:float="",mots_spam:tuple=('',)) -> str:
+    "crÃ©e le text: Spam/Ham + Raisons"
+    if output == True:
+        text=f"""<h2>SPAM (ProbabilitÃ©: {output_proba})</h2>
+            <h3 id="reasons">Raisons:</h3>
+            """
+        for mot in mots_spam:
+            text2+=f"<p>{mot}</p>"
+    else: text = "HAM"
+    return text
 
-    <html>
-        <head>
-            <title>Détecteur de Spam</title>
-            
+def createPage() -> str:
+    "CrÃ©e la page web"
+    styles = """
     <style>
         h1 {
           font-family: "Calibri";
@@ -51,15 +60,8 @@
           font-family: "Calibri";
           font-size: "12px";
         }
-    </style>
-        </head>
-        <body>
-            <h1>DETECTEUR DE SPAM</h1>
-            <textarea rows="30" cols="275" placeholder="Copier le mail ici" id="mail"></textarea>
-            <button type="button" onclick="detectSpam()">Detect</button>
-            <input type="range" min="0" max="1" step="0.01" id="Slider" onchange="showSlider()"><label id="SliderText">0.5</label>
-            <div id="Result"><p>­</p><p>­</p><p>­</p><p>­</p><p>­</p><p>­</p></div>
-            <script>
+    </style>"""
+    scripts="""<script>
             function showSlider(){document.getElementById("SliderText").innerHTML = document.getElementById("Slider").value;}
             </script>
             <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -68,13 +70,32 @@
             sensibility = document.getElementById("Slider").value;
             mail = document.getElementById("mail").value
             $.ajax({
-              url: "INSERERSCRIPTPYTHON.py",
+              url: "pont.py",
              context: document.body
             }).done(function(result) {
                 document.getElementById("Result").innerText=result;
             });
             }
-            </script> 
-            <p>­</p>
+            </script> """
+    web = f"""
+    <html>
+        <head>
+            <title>DÃ©tecteur de Spam</title>
+            {styles}
+        </head>
+        <body>
+            <h1>DETECTEUR DE SPAM</h1>
+            <textarea rows="30" cols="275" placeholder="Copier le mail ici" id="mail"></textarea>
+            <button type="button" onclick="detectSpam()">Detect</button>
+            <input type="range" min="0" max="1" step="0.01" id="Slider" onchange="showSlider()"><label id="SliderText">0.5</label>
+            <div id="Result"><p>Â­</p><p>Â­</p><p>Â­</p><p>Â­</p><p>Â­</p><p>Â­</p></div>
+            {scripts}
+            <p>Â­</p>
         </body>
-    </html>
+    </html>"""
+    file = open("page.html", "w")
+    file.write(web)
+    file.close()
+
+if __name__ == "__main__":
+  createPage()
