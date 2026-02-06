@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 objet        = ""
 mail         = ""
 output       = True
@@ -107,7 +107,6 @@ def showPage(objet="", mail="",output="",output_proba="",mots_spam=""):
     file.write(web)
     file.close()
 showPage(objet,mail,output,output_proba,mots_spam)
-=======
 objet        = ""
 mail         = ""
 output       = True
@@ -142,4 +141,3 @@ print(web)
 file = open("page.html", "w")
 file.write(web)
 file.close()
->>>>>>> 254ea95d95a71620882d93c156c23ce68ee573d9
