@@ -1,24 +1,16 @@
-
-objet        = ""
-mail         = ""
-output       = True
-output_proba = 1
-mots_spam    = ("spam","spam")
-def createOutputHTML(output="", output_proba="",mots_spam=""):
+def createOutputHTML(output:bool="", output_proba:float="",mots_spam:tuple=('',)) -> str:
+    "crée le text: Spam/Ham + Raisons"
     if output == True:
-        text2=f"""<h2>SPAM (Probabilité: {output_proba})</h2>
+        text=f"""<h2>SPAM (Probabilité: {output_proba})</h2>
             <h3 id="reasons">Raisons:</h3>
             """
         for mot in mots_spam:
             text2+=f"<p>{mot}</p>"
-    else: text2 = "HAM"
-    return text2
+    else: text = "HAM"
+    return text
 
-def showPage(objet="", mail="",output="",output_proba="",mots_spam=""):
-    #if mail == "": text1 = "Copier le mail ici"
-    #else: 
-    text1 = mail
-    text2 = createOutputHTML(output,output_proba,mots_spam)
+def createPage() -> str:
+    "Crée la page web"
     styles = """
     <style>
         h1 {
@@ -94,50 +86,17 @@ def showPage(objet="", mail="",output="",output_proba="",mots_spam=""):
         </head>
         <body>
             <h1>DETECTEUR DE SPAM</h1>
-            <textarea rows="30" cols="275" placeholder="Copier le mail ici" id="mail">{text1}</textarea>
+            <textarea rows="30" cols="275" placeholder="Copier le mail ici" id="mail"></textarea>
             <button type="button" onclick="detectSpam()">Detect</button>
             <input type="range" min="0" max="1" step="0.01" id="Slider" onchange="showSlider()"><label id="SliderText">0.5</label>
-            <div id="Result">{text2}</div>
+            <div id="Result"></div>
             {scripts}
             <p>­</p>
         </body>
     </html>"""
-    print(web)
     file = open("page.html", "w")
     file.write(web)
     file.close()
-showPage(objet,mail,output,output_proba,mots_spam)
-objet        = ""
-mail         = ""
-output       = True
-output_proba = 1
-seuil        = 0.5
-mots_spam    = ("spam","spam")
 
-if mail == "": text1 = "Copier le mail ici"
-else: text1 = mail
-if output == True:
-    text2=f"""<h2>SPAM ({output_proba})</h2>
-    <h3>Raisons:</h3>
-    """
-    for mot in mots_spam:
-        text2+=f"<p>{mot}</p>"
-else: text2 = "HAM"
-web = f"""
-<html>
-    <head>
-        <title>Détecteur de Spam</title>
-        <styles>
-        </styles>
-    </head>
-    <body>
-        <h1>SPAM DETECTOR</h1>
-        <td>{text1}</td>
-        #insérer bouton et slider ici
-        <td>{text2}</td>
-    </body>
-</html>"""
-print(web)
-file = open("page.html", "w")
-file.write(web)
-file.close()
+if __name__ == "__main__":
+  createPage()
