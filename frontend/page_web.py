@@ -26,20 +26,19 @@ def createPage() -> str:
         }
         button {
           position:relative;
-          top: 30px;
-          left: -1500px;
+          top: 15px;
           font-family: "Calibri";
           font-size: "16px";
         }
         input{
           position:relative;
           left: 100px;
-          top: 8px;
+          top: 15px;
         }
         label{
           position:relative;
           left: 100px;
-          top: 6px;
+          top: 13px;
         }
         div{
           border: 3px solid;
@@ -89,7 +88,7 @@ def createPage() -> str:
             <textarea rows="30" cols="275" placeholder="Copier le mail ici" id="mail"></textarea>
             <button type="button" onclick="detectSpam()">Detect</button>
             <input type="range" min="0" max="1" step="0.01" id="Slider" onchange="showSlider()"><label id="SliderText">0.5</label>
-            <div id="Result"></div>
+            <div id="Result"><p>­</p><p>­</p><p>­</p><p>­</p><p>­</p><p>­</p></div>
             {scripts}
             <p>­</p>
         </body>
