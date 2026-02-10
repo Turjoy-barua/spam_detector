@@ -69,7 +69,8 @@
             mail = document.getElementById("mail").value
             $.ajax({
               url: "pont.py",
-             context: document.body
+             context: document.body,
+             data:{"mail":mail,"sensibility":sensibility}
             }).done(function(result) {
                 document.getElementById("Result").innerText=result;
             });
