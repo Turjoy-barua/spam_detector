@@ -1,8 +1,12 @@
-from NotImplemented import *
-def detect(mail,sensibility):
-    result=NotImplemented
+from backend import main
+
+
+
+def detect(sensibility):
+    mail = input()
+    result = main.user_input(list(mail))
     html=createOutputHTML(NotImplemented,NotImplemented,NotImplemented)
-    return
+    print(mail)
 
 def createOutputHTML(output:bool="", output_proba:float="",mots_spam:tuple=('',)) -> str:
     "crée le text: Spam/Ham + Raisons"
@@ -16,3 +20,4 @@ def createOutputHTML(output:bool="", output_proba:float="",mots_spam:tuple=('',)
     return text
 
 detect(mail="",sensibility="")
+
