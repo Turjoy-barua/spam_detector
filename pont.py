@@ -1,11 +1,8 @@
 from backend import main
-
-
-
-def detect(sensibility):
-    mail = input()
+def detect(mail,sensibility):
+    "mail et sensibility viennent de l'HTML"
     result = main.user_input(list(mail))
-    html=createOutputHTML(NotImplemented,NotImplemented,NotImplemented)
+    html=createOutputHTML(result[0],result[1])
     print(mail)
 
 def createOutputHTML(output:bool="", output_proba:float="",mots_spam:tuple=('',)) -> str:
@@ -19,5 +16,5 @@ def createOutputHTML(output:bool="", output_proba:float="",mots_spam:tuple=('',)
     else: text = "HAM"
     return text
 
-detect(mail="",sensibility="")
+detect(mail,sensibility)
 

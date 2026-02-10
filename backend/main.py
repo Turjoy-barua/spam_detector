@@ -25,5 +25,6 @@ def user_input(text_input):
         print("this is a ham mail")
     print(prediction)
     print(prediction_proba)
+    return prediction,prediction_proba
     
     
