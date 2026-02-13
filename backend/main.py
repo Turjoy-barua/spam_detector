@@ -13,9 +13,9 @@ import joblib
 
 
 def user_input(text_input):
-    model = joblib.load("spam_model.joblib")
-    vectorizer = joblib.load("tfidf_vectorizer.joblib")
-    text_input_vectorized = vectorizer.transform(text_input)
+    model = joblib.load("/Users/TURJOY/Documents/spam_detector/backend/spam_model.joblib")
+    vectorizer = joblib.load("backend/tfidf_vectorizer.joblib")
+    text_input_vectorized = vectorizer.transform([text_input])
     prediction = model.predict(text_input_vectorized)
     prediction_proba = model.predict_proba(text_input_vectorized)
 
@@ -26,5 +26,14 @@ def user_input(text_input):
     print(prediction)
     print(prediction_proba)
     return prediction,prediction_proba
-    
-    
+
+
+user_input(input("input -> "))
+'''    
+def paragraph(user_input):
+    text_list = []
+    user_input = user_input.split('\n\n')
+    for x in range(len(user_input)):
+        text_list.append(user_input[x])
+    print(text_list)
+paragraph(input("->"))'''
