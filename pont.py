@@ -1,8 +1,16 @@
+from flask import Flask, request, render_template
 from backend import main
-if __name__=="__main__":
-    data={'mail':'abcdefg'}
+app = Flask(__name__,)
+
+@app.route('/Spam', methods=['POST']) #trouvé dans Reddit
+def server():
+    if request.method == "POST":
+        data=request.form.get("data")
+        mail=request.form.get("mail")
+        sensibility=request.form.get("sensibility")
+        return data,sensibility
+    return render_template('page.html')
 def createOutputHTML(output:bool="", output_proba:float="",mots_spam:tuple=('',)) -> str:
-    "crée le text: Spam/Ham + Raisons"
     if output == True:
         text=f"""<h2>🔴SPAM (Probabilité: {output_proba})</h2>
             <h3 id="reasons">Raisons:</h3>
@@ -11,8 +19,7 @@ def createOutputHTML(output:bool="", output_proba:float="",mots_spam:tuple=('',)
             text2+=f"<p>{mot}</p>"
     else: text = "🟢HAM"
     return text
+if __name__=='__main__': 
+   app.run(host='localhost', port=5000)
+print("a")
 
-"mail et sensibility viennent de l'HTML"
-result = main.user_input(list(data['mail']))
-html=createOutputHTML(result[0],result[1])
-print(html)
