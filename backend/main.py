@@ -9,10 +9,9 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 import joblib
 
+import api
 
-
-
-def user_input(text_input):
+def mail_input(text_input):
     model = joblib.load("/Users/TURJOY/Documents/spam_detector/backend/spam_model.joblib")
     vectorizer = joblib.load("backend/tfidf_vectorizer.joblib")
     text_input_vectorized = vectorizer.transform([text_input])
@@ -25,15 +24,9 @@ def user_input(text_input):
         print("this is a ham mail")
     print(prediction)
     print(prediction_proba)
+    
     return prediction,prediction_proba
 
 
-user_input(input("input -> "))
-'''    
-def paragraph(user_input):
-    text_list = []
-    user_input = user_input.split('\n\n')
-    for x in range(len(user_input)):
-        text_list.append(user_input[x])
-    print(text_list)
-paragraph(input("->"))'''
+print(api.get_mail())
+mail_input(api.get_mail())

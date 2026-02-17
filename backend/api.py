@@ -9,14 +9,14 @@ from googleapiclient.errors import HttpError
 SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
 
-def main():
+def get_mail():
     """Shows basic usage of the Gmail API.
     Lists the user's Gmail messages.
     """
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
-    # time.
+    # time. 
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
     # If there are no (valid) credentials available, let the user log in.
@@ -37,29 +37,24 @@ def main():
             service.users().messages().list(userId="me", labelIds=["INBOX"]).execute()
         )
         messages = results.get("messages", [])
-
+        #message_count = int(input("how many messages do you want?"))
         if not messages:
             print("No messages found.")
             return
+        else:
+            print("Messages:")
+            for message in messages[:1]:
+                #print(f'Message ID: {message["id"]}')
+                msg = (
+                    service.users().messages().get(userId="me", id=message["id"]).execute()
+                )
+                #print(f'  Subject: {msg["snippet"]}')
+                return(msg["snippet"])
 
-        print("Messages:")
-        for message in messages:
-            print(f'Message ID: {message["id"]}')
-            msg = (
-                service.users().messages().get(userId="me", id=message["id"], format="full").execute()
-            )
-            print(msg)
-
-        
     except HttpError as error:
         # TODO(developer) - Handle errors from gmail API.
         print(f"An error occurred: {error}")
 
 
 if __name__ == "__main__":
-    main()
-
-"""    headers = msg["payload"]["headers"]
-            for header in headers:
-                if header["name"] == "Subject":
-                    print("Subject:", header["value"]) """
+    get_mail()
