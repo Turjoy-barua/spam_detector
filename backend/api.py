@@ -4,7 +4,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-
+import pprint
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
@@ -17,8 +17,8 @@ def get_mail():
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time. 
-    if os.path.exists("token.json"):
-        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+    if os.path.exists("/Users/turjoybarua/Documents/detec_mail_spam/backend/token.json"):
+        creds = Credentials.from_authorized_user_file("/Users/turjoybarua/Documents/detec_mail_spam/backend/token.json", SCOPES)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
@@ -27,7 +27,7 @@ def get_mail():
             flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open("token.json", "w") as token:
+        with open("/Users/turjoybarua/Documents/detec_mail_spam/backend/token.json", "w") as token:
             token.write(creds.to_json())
 
     try:
@@ -42,19 +42,26 @@ def get_mail():
             print("No messages found.")
             return
         else:
-            print("Messages:")
+            #print("Messages:")
             for message in messages[:1]:
                 #print(f'Message ID: {message["id"]}')
                 msg = (
-                    service.users().messages().get(userId="me", id=message["id"]).execute()
+                    service.users().messages().get(userId="me", id=message["id"], format="full").execute()
                 )
-                #print(f'  Subject: {msg["snippet"]}')
-                return(msg["snippet"])
+                subject = ""
+                headers = msg['payload']['headers']
+                for header in headers:
+                    if header["name"] == "Subject":
+                        subject = header["value"]                
+                #pprint.pprint(msg['payload']['headers'])
+                #print(f'{msg["snippet"]}')
+                #print(subject)
+                return(subject, msg["snippet"])
 
     except HttpError as error:
-        # TODO(developer) - Handle errors from gmail API.
-        print(f"An error occurred: {error}")
+        #Handle errors from gmail API.
+        return(f"An error occurred: {error}")
 
 
 if __name__ == "__main__":
-    get_mail()
+    print(get_mail())
