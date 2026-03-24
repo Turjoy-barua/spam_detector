@@ -47,3 +47,9 @@
 - Chargement
 - Entraînement ou chargement du modèle
 - Carte thermique
+
+
+
+to use the app use streamlit run backend/app.py and you can see all the functionalities of the model including calling the api 
+the api uses just one email as for now for not being the app public
+unable to conect the web created my marc

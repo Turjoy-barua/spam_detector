@@ -10,11 +10,11 @@ model = joblib.load("/Users/turjoybarua/Documents/spam_detector/backend/spam_mod
 vectorizer = joblib.load("/Users/turjoybarua/Documents/spam_detector/backend/tfidf_vectorizer.joblib")
    
 def mail_input(text_input):
-    text_input_vectorized = vectorizer.transform([text_input])
-    prediction = model.predict(text_input_vectorized)
-    prediction_proba = model.predict_proba(text_input_vectorized)
+    text_input_vectorized = vectorizer.transform([text_input]) # transforming the words 
+    prediction = model.predict(text_input_vectorized)   # using the same model to predict
+    prediction_proba = model.predict_proba(text_input_vectorized) # to get the probability of being spam and ham 
 
-    if prediction == [1]:
+    if prediction == [1]: # just to check in terminal if needed
         print("this is a spam mail")
     else:
         print("this is a ham mail")
@@ -24,7 +24,7 @@ def mail_input(text_input):
     coeff = model.coef_[0]
     non_zero_idx = words.nonzero()
 
-    df_email = pd.DataFrame({
+    df_email = pd.DataFrame({ # to get the list of words that affects the mail 
         "word": words[non_zero_idx],
         "tfidf": text_input_vectorized.toarray()[0][non_zero_idx],
         "coef": coeff[non_zero_idx]
@@ -32,7 +32,7 @@ def mail_input(text_input):
 
     df_email["impact"] = (df_email["tfidf"] * df_email["coef"]) * 100
 
-    if prediction == [1]:
+    if prediction == [1]: # for being spam or ham
         df_email = df_email.sort_values("impact", ascending=False)
     else:
         df_email = df_email.sort_values("impact")
