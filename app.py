@@ -89,7 +89,7 @@ if upper_button2:
     col2.metric("Precision (Class 1)", "0.95")
     col3.metric("Recall (Class 1)", "0.99")
     st.subheader("Confusion matrix")
-    st.image("/Users/turjoybarua/Documents/detec_mail_spam/output.png")
+    st.image("output.png")
 
 # conecting with api and show the last mail 
 if st.session_state.api:

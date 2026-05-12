@@ -6,8 +6,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 #import api
-model = joblib.load("/Users/turjoybarua/Documents/spam_detector/backend/spam_model.joblib")
-vectorizer = joblib.load("/Users/turjoybarua/Documents/spam_detector/backend/tfidf_vectorizer.joblib")
+model = joblib.load("spam_model.joblib")
+vectorizer = joblib.load("tfidf_vectorizer.joblib")
    
 def mail_input(text_input):
     text_input_vectorized = vectorizer.transform([text_input]) # transforming the words 
